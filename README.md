@@ -43,3 +43,7 @@
 ``````
 npm run build
 ``````
+会打包到项目根目录 build 目录下
+
+### 参考文章
+[webpack多页应用架构系列（十三）：构建一个简单的模板布局系统](https://segmentfault.com/a/1190000007159115#articleHeader3)
