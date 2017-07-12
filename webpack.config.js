@@ -16,7 +16,8 @@ const config = {
 	module: {
 		loaders
 	},
-	plugins
+	plugins,
+	devtool: process.env.CREATE_MAP || false
 }
 
 module.exports = config
