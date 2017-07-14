@@ -1,10 +1,12 @@
-import layout from './../../unitls/layout/layout';
+import Html from 'Html';
+import header from 'header-temp';
+import footer from 'footer-temp';
 import ejs from './temp/index.ejs';
 
-const PAGE_TITLE = '678'
+const html = new Html();
+html.temp({header,footer});
+html.data({title:'title'});
+export default html.rend(ejs)
 
-export default layout.init({
-    PAGE_TITLE,
-    data:{ name: '这是测试title' }
-}
-).run(ejs)
+// 模版入口 在这里组织模版
+// 这个文件必须存在,不然无法生成html页面
