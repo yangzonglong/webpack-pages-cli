@@ -1,6 +1,3 @@
-import header from './../components/header/html.ejs';
-import footer from './../components/footer/html.ejs';
-
 class Html {
     constructor(title){
         this.title = title
