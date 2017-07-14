@@ -22,6 +22,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "postbuild": "node script-console/build.js",
-    "dev": "cross-env CREATE_MAP=source-map webpack-dev-server"
+    "dev": "cross-env CREATE_MAP=source-map webpack-dev-server",
+    "postdev": "node script-console/dev.js"
   }
 }
