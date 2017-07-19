@@ -23,8 +23,10 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "postbuild": "node script-console/build.js",
+    "postbuild": "cross-env TEXT=build-ok node npm-scripts/console.js",
     "dev": "cross-env CREATE_MAP=source-map webpack-dev-server",
-    "postdev": "node script-console/dev.js"
+    "postdev": "cross-env TEXT=dev-end node npm-scripts/console.js",
+    "create-page": "node npm-scripts/create-page.js",
+    "create-component": "node npm-scripts/create-component.js"
   }
 }
