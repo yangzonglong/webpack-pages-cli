@@ -13,7 +13,7 @@ module.exports = [{
     exclude: /node_modules/,
     loader: extractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader']
+        use: [`css-loader?minimize=${process.env.MINCSSJS || false}`]
     })
 },
 {
@@ -26,7 +26,7 @@ module.exports = [{
     exclude: /node_modules/,
     loader: extractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader','sass-loader']
+        use: [`css-loader?minimize=${process.env.MINCSSJS || false}`,'sass-loader']
     })
 }
 ]
