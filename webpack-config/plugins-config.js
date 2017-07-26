@@ -17,7 +17,7 @@ pageArr.forEach(item => {
 if(process.env.MINCSSJS){
     plugins.push(new uglifyJSPlugin())
 }
-plugins.push(new extractTextPlugin('[name].css')) // 抽离css
+plugins.push(new extractTextPlugin({filename:'[name].css',allChunks:true})) // 抽离css
 plugins.push(new webpack.optimize.CommonsChunkPlugin({ // 分离共用js css
     name: 'static/common/common',
     minChunks:2
