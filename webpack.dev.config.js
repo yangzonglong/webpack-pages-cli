@@ -9,10 +9,16 @@ const alias = require('./webpack/alias');
 const config = {
 	entry,
 	output,
+	devServer: {
+		hot: false,
+		contentBase: path.resolve(__dirname, 'build'),
+		publicPath: '/'
+	},
 	module: {
 		loaders
 	},
 	plugins,
+	devtool: 'source-map',
 	resolve: {
 		alias
 	}

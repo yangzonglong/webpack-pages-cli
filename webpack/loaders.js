@@ -13,20 +13,20 @@ module.exports = [{
     exclude: /node_modules/,
     loader: extractTextPlugin.extract({
         fallback: 'style-loader',
-        use: [`css-loader?minimize=${process.env.MINCSSJS || false}`]
+        use: ['css-loader?minimize=true']
     })
 },
 {
     test: /\.(png|jpg|gif)$/,
     exclude: /node_modules/,
-    loader: 'url-loader?limit=10240'
+    loader: `url-loader?limit=10240&name=static-${process.env.npm_package_version}/imgs/[name].[ext]`
 },
 {
     test: /\.scss$/,
     exclude: /node_modules/,
     loader: extractTextPlugin.extract({
         fallback: 'style-loader',
-        use: [`css-loader?minimize=${process.env.MINCSSJS || false}`,'sass-loader']
+        use: ['css-loader?minimize=true','sass-loader']
     })
 }
 ]

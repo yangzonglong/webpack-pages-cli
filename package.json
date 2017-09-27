@@ -26,10 +26,9 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "build": "cross-env MINCSSJS=true webpack --config webpack.config.js",
-    "postbuild": "cross-env TEXT=build-ok node npm-scripts/console.js",
-    "dev": "cross-env CREATE_MAP=source-map webpack-dev-server",
-    "postdev": "cross-env TEXT=dev-end node npm-scripts/console.js",
+    "build": "cross-env ENV=test webpack",
+    "prod": "cross-env ENV=prod webpack",
+    "start": "webpack-dev-server --config webpack.dev.config.js",
     "create-page": "node npm-scripts/create-page.js",
     "create-component": "node npm-scripts/create-component.js"
   }

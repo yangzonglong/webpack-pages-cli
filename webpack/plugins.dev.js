@@ -1,33 +1,47 @@
+/**
+ * 插件
+ */
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
 const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const pageArr = require('./pages-config');
+const pageArr = require('./pages');
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 let plugins = [];
+
+// 输出页面
 pageArr.forEach(item => {
     plugins.push(new htmlWebpackPlugin({
         filename: `${item}.html`,
         template: `src/pages/${item}/app-temp.js`,
         chunks: [`static-${process.env.npm_package_version}/${item}/`, `static-${process.env.npm_package_version}/common/common`],
-        hash: true,
+        hash: false,
         xhtml: true
     }))
 })
-// 压缩JS
-if (process.env.MINCSSJS) {
-    plugins.push(new uglifyJSPlugin())
-}
-plugins.push(new extractTextPlugin({ filename: '[name].min.css', allChunks: true })) // 抽离css
-plugins.push(new webpack.optimize.CommonsChunkPlugin({ // 分离共用js css
-    name: `static-${process.env.npm_package_version}/common/common`,
-    minChunks: 3
+
+// 配置全局变量
+plugins.push(new webpack.DefinePlugin({
+    _ENV_: "dev"
 }))
-// 处理提取公共css重复问题
+
+// 抽离css 
+plugins.push(new extractTextPlugin({ filename: '[name].min.css', allChunks: true }))
+
+// 分离公共js
+plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    name: `static-${process.env.npm_package_version}/common/common`,
+    minChunks: function (module, count) {
+        return module.resource && (/js/).test(module.resource) && count > 2
+    }
+}))
+
+// 处理提取css重复问题
 plugins.push(new optimizeCssAssetsPlugin({
-    assetNameRegExp: /common\.min\.css$/g,
+    assetNameRegExp: /\.css$/g,
     cssProcessor: require('cssnano'),
-    cssProcessorOptions: { discardComments: { removeAll: true } },
+    cssProcessorOptions: { discardComments: { removeAll: true }, safe: true },
     canPrint: true
 }))
+
 module.exports = plugins

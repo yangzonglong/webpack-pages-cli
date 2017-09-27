@@ -1,3 +1,6 @@
+/**
+ * 输出pages下所有页面名
+ */
 const glob = require('glob');
 let pages = [];
 const options = {
